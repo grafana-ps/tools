@@ -20,7 +20,7 @@ $ npm install -g @grafana-ps/tools
 $ grot COMMAND
 running command...
 $ grot (--version)
-@grafana-ps/tools/0.1.0 linux-x64 node-v20.19.2
+@grafana-ps/tools/0.1.0 linux-x64 node-v23.11.1
 $ grot --help [COMMAND]
 USAGE
   $ grot COMMAND
@@ -29,6 +29,9 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`grot check k8s-monitoring values FILE`](#grot-check-k8s-monitoring-values-file)
+* [`grot check k8s-monitoring values cluster FILE`](#grot-check-k8s-monitoring-values-cluster-file)
+* [`grot check k8s-monitoring values destinations FILE`](#grot-check-k8s-monitoring-values-destinations-file)
 * [`grot help [COMMAND]`](#grot-help-command)
 * [`grot plugins`](#grot-plugins)
 * [`grot plugins add PLUGIN`](#grot-plugins-add-plugin)
@@ -40,6 +43,65 @@ USAGE
 * [`grot plugins uninstall [PLUGIN]`](#grot-plugins-uninstall-plugin)
 * [`grot plugins unlink [PLUGIN]`](#grot-plugins-unlink-plugin)
 * [`grot plugins update`](#grot-plugins-update)
+
+## `grot check k8s-monitoring values FILE`
+
+full validation of values.yaml
+
+```
+USAGE
+  $ grot check k8s-monitoring values FILE [-t prometheus|loki|tempo...]
+
+ARGUMENTS
+  FILE  values file to validate
+
+FLAGS
+  -t, --types=<option>...  [default: prometheus,loki,tempo] types of destinations to validate
+                           <options: prometheus|loki|tempo>
+
+DESCRIPTION
+  full validation of values.yaml
+```
+
+_See code: [src/commands/check/k8s-monitoring/values.ts](https://github.com/grafana-ps/tools/blob/v0.1.0/src/commands/check/k8s-monitoring/values.ts)_
+
+## `grot check k8s-monitoring values cluster FILE`
+
+validate .cluster
+
+```
+USAGE
+  $ grot check k8s-monitoring values cluster FILE
+
+ARGUMENTS
+  FILE  values file to validate
+
+DESCRIPTION
+  validate .cluster
+```
+
+_See code: [src/commands/check/k8s-monitoring/values/cluster.ts](https://github.com/grafana-ps/tools/blob/v0.1.0/src/commands/check/k8s-monitoring/values/cluster.ts)_
+
+## `grot check k8s-monitoring values destinations FILE`
+
+validate .destinations
+
+```
+USAGE
+  $ grot check k8s-monitoring values destinations FILE [-t prometheus|loki|tempo...]
+
+ARGUMENTS
+  FILE  values file to validate
+
+FLAGS
+  -t, --types=<option>...  [default: prometheus,loki,tempo] types of destinations to validate
+                           <options: prometheus|loki|tempo>
+
+DESCRIPTION
+  validate .destinations
+```
+
+_See code: [src/commands/check/k8s-monitoring/values/destinations.ts](https://github.com/grafana-ps/tools/blob/v0.1.0/src/commands/check/k8s-monitoring/values/destinations.ts)_
 
 ## `grot help [COMMAND]`
 
