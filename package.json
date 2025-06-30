@@ -8,9 +8,14 @@
   },
   "bugs": "https://github.com/grafana-ps/tools/issues",
   "dependencies": {
+    "@grafana-ps/tools": "link:",
     "@oclif/core": "^4",
     "@oclif/plugin-help": "^6",
-    "@oclif/plugin-plugins": "^5"
+    "@oclif/plugin-plugins": "^5",
+    "@types/lodash": "^4.17.19",
+    "lodash": "^4.17.21",
+    "node-emoji": "^2.2.0",
+    "yaml": "^2.8.0"
   },
   "devDependencies": {
     "@eslint/compat": "^1",
