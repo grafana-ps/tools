@@ -20,7 +20,7 @@ $ npm install -g @grafana-ps/tools
 $ grot COMMAND
 running command...
 $ grot (--version)
-@grafana-ps/tools/0.0.0 linux-x64 node-v23.11.1
+@grafana-ps/tools/0.1.0 linux-x64 node-v20.19.2
 $ grot --help [COMMAND]
 USAGE
   $ grot COMMAND
@@ -29,8 +29,6 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`grot hello PERSON`](#grot-hello-person)
-* [`grot hello world`](#grot-hello-world)
 * [`grot help [COMMAND]`](#grot-help-command)
 * [`grot plugins`](#grot-plugins)
 * [`grot plugins add PLUGIN`](#grot-plugins-add-plugin)
@@ -42,48 +40,6 @@ USAGE
 * [`grot plugins uninstall [PLUGIN]`](#grot-plugins-uninstall-plugin)
 * [`grot plugins unlink [PLUGIN]`](#grot-plugins-unlink-plugin)
 * [`grot plugins update`](#grot-plugins-update)
-
-## `grot hello PERSON`
-
-Say hello
-
-```
-USAGE
-  $ grot hello PERSON -f <value>
-
-ARGUMENTS
-  PERSON  Person to say hello to
-
-FLAGS
-  -f, --from=<value>  (required) Who is saying hello
-
-DESCRIPTION
-  Say hello
-
-EXAMPLES
-  $ grot hello friend --from oclif
-  hello friend from oclif! (./src/commands/hello/index.ts)
-```
-
-_See code: [src/commands/hello/index.ts](https://github.com/grafana-ps/tools/blob/v0.0.0/src/commands/hello/index.ts)_
-
-## `grot hello world`
-
-Say hello world
-
-```
-USAGE
-  $ grot hello world
-
-DESCRIPTION
-  Say hello world
-
-EXAMPLES
-  $ grot hello world
-  hello world! (./src/commands/hello/world.ts)
-```
-
-_See code: [src/commands/hello/world.ts](https://github.com/grafana-ps/tools/blob/v0.0.0/src/commands/hello/world.ts)_
 
 ## `grot help [COMMAND]`
 
