@@ -25,6 +25,8 @@ export default class CheckK8sMonitoringCluster extends Command {
 
     const {file} = args
 
+    this.log(emoji.emojify(`:white_circle: Validating .cluster for ${file}`))
+
     const v = parseDocument(fs.readFileSync(file, 'utf8'))
 
     if (v.errors.length > 0) {
@@ -43,9 +45,8 @@ export default class CheckK8sMonitoringCluster extends Command {
       this.error('.cluster.name must be a string')
     }
 
-    this.log(emoji.emojify(`:white_check_mark: .cluster.name is valid`))
+    this.log(emoji.emojify(`:heavy_check_mark: .cluster.name is valid`))
 
-    this.log()
     this.log(emoji.emojify(`:white_check_mark: .cluster is valid`))
   }
 }
