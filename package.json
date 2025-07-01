@@ -66,6 +66,7 @@
       }
     }
   },
+  "private": false,
   "repository": "grafana-ps/tools",
   "scripts": {
     "build": "shx rm -rf dist && tsc -b",
