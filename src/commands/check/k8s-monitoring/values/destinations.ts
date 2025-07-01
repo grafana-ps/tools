@@ -13,9 +13,9 @@ import {
 } from 'yaml'
 
 import {
-  writeLogs,
-  writeMetrics,
-  writeTraces,
+  writeLog,
+  writeMetric,
+  writeTrace,
 } from '../../../../util.js'
 
 export default class CheckK8sMonitoringValuesDestinations extends Command {
@@ -88,15 +88,15 @@ export default class CheckK8sMonitoringValuesDestinations extends Command {
 
     try {
       if (type === 'prometheus') {
-        await writeMetrics(username, password, url)
+        await writeMetric(username, password, url)
       }
 
       if (type === 'loki') {
-        await writeLogs(username, password, url)
+        await writeLog(username, password, url)
       }
 
       if (type === 'otlp') {
-        await writeTraces(username, password, url)
+        await writeTrace(username, password, url)
       }
     } catch (error) {
       this.error(`${prefix} Connection to Grafana Cloud failed: \n\n${error}`)

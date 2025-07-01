@@ -21,7 +21,7 @@ export function createHeaders(username, password) {
   }
 }
 
-export async function writeMetrics(
+export async function writeMetric(
   username: string,
   password: string,
   url: string,
@@ -41,7 +41,7 @@ export async function writeMetrics(
   }
 }
 
-export async function writeLogs(
+export async function writeLog(
   username: string,
   password: string,
   url: string,
@@ -68,7 +68,7 @@ export async function writeLogs(
   }
 }
 
-export async function writeTraces(
+export async function writeTrace(
   username: string,
   password: string,
   url: string,
