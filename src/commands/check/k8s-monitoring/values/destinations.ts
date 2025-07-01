@@ -26,14 +26,14 @@ export default class CheckK8sMonitoringValuesDestinations extends Command {
   static override flags = {
     types: Flags.string({
       char: 't',
-      default: ['prometheus','loki','tempo'],
+      default: ['prometheus','loki','otlp'],
       delimiter: ',',
       description: 'types of destinations to validate',
       multiple: true,
       options: [
         'prometheus',
         'loki',
-        'tempo',
+        'otlp',
       ],
       required: false,
     }),
