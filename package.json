@@ -1,7 +1,7 @@
 {
   "name": "@grafana-ps/tools",
   "description": "Grafana Cloud tools provided by the Grafana PS team.",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "author": "Grafana PS",
   "bin": {
     "grot": "./bin/run.js"
