@@ -21,7 +21,7 @@
     "@types/lodash": "^4.17.19",
     "lodash": "^4.17.21",
     "node-emoji": "^2.2.0",
-    "node-fetch": "^3.3.2",
+    "node-fetch": "^2.7.0",
     "prometheus-remote-write": "^0.5.1",
     "tracing": "link:k6/x/tracing",
     "yaml": "^2.8.0"
