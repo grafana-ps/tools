@@ -15,6 +15,7 @@ import {
 import {
   writeLogs,
   writeMetrics,
+  writeTraces,
 } from '../../../../util.js'
 
 export default class CheckK8sMonitoringValuesDestinations extends Command {
@@ -82,7 +83,7 @@ export default class CheckK8sMonitoringValuesDestinations extends Command {
       this.error(`${prefix} Missing auth.password`)
     }
 
-    this.log(emoji.emojify(`heavy_check_mark: ${prefix} Destination is valid`))
+    this.log(emoji.emojify(`:heavy_check_mark: ${prefix} Destination is valid`))
     this.log(emoji.emojify(`:white_circle: ${prefix} Testing connection to Grafana Cloud...`))
 
     try {
@@ -92,6 +93,10 @@ export default class CheckK8sMonitoringValuesDestinations extends Command {
 
       if (type === 'loki') {
         await writeLogs(username, password, url)
+      }
+
+      if (type === 'otlp') {
+        await writeTraces(username, password, url)
       }
     } catch (error) {
       this.error(`${prefix} Connection to Grafana Cloud failed: \n\n${error}`)
