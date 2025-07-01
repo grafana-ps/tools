@@ -84,7 +84,7 @@ export default class CheckK8sMonitoringValuesDestinations extends Command {
     }
 
     this.log(emoji.emojify(`:heavy_check_mark: ${prefix} Destination is valid`))
-    this.log(emoji.emojify(`:white_circle: ${prefix} Testing connection to Grafana Cloud...`))
+    this.log(emoji.emojify(`:white_circle: ${prefix} Testing write to Grafana Cloud...`))
 
     try {
       if (type === 'prometheus') {
@@ -99,10 +99,10 @@ export default class CheckK8sMonitoringValuesDestinations extends Command {
         await writeTrace(username, password, url)
       }
     } catch (error) {
-      this.error(`${prefix} Connection to Grafana Cloud failed: \n\n${error}`)
+      this.error(`${prefix} test write to Grafana Cloud failed: \n\n${error}`)
     }
 
-    this.log(emoji.emojify(`:white_check_mark: ${prefix} Connection to Grafana Cloud successful`))
+    this.log(emoji.emojify(`:white_check_mark: ${prefix} Test write to Grafana Cloud successful`))
   }
 
 
