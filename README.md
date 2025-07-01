@@ -20,7 +20,7 @@ $ npm install -g @grafana-ps/tools
 $ grot COMMAND
 running command...
 $ grot (--version)
-@grafana-ps/tools/0.1.1 linux-x64 node-v23.11.1
+@grafana-ps/tools/0.1.1 linux-x64 node-v20.19.2
 $ grot --help [COMMAND]
 USAGE
   $ grot COMMAND
@@ -50,14 +50,14 @@ full validation of values.yaml
 
 ```
 USAGE
-  $ grot check k8s-monitoring values FILE [-t prometheus|loki|tempo...]
+  $ grot check k8s-monitoring values FILE [-t prometheus|loki|otlp...]
 
 ARGUMENTS
   FILE  values file to validate
 
 FLAGS
-  -t, --types=<option>...  [default: prometheus,loki,tempo] types of destinations to validate
-                           <options: prometheus|loki|tempo>
+  -t, --types=<option>...  [default: prometheus,loki,otlp] types of destinations to validate
+                           <options: prometheus|loki|otlp>
 
 DESCRIPTION
   full validation of values.yaml
@@ -88,14 +88,14 @@ validate .destinations
 
 ```
 USAGE
-  $ grot check k8s-monitoring values destinations FILE [-t prometheus|loki|tempo...]
+  $ grot check k8s-monitoring values destinations FILE [-t prometheus|loki|otlp...]
 
 ARGUMENTS
   FILE  values file to validate
 
 FLAGS
-  -t, --types=<option>...  [default: prometheus,loki,tempo] types of destinations to validate
-                           <options: prometheus|loki|tempo>
+  -t, --types=<option>...  [default: prometheus,loki,otlp] types of destinations to validate
+                           <options: prometheus|loki|otlp>
 
 DESCRIPTION
   validate .destinations
