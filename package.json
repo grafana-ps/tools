@@ -34,10 +34,11 @@
     "oclif": "^4",
     "shx": "^0.3.3",
     "ts-node": "^10",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22.0.0"
   },
   "files": [
     "./bin",
