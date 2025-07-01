@@ -20,7 +20,7 @@ $ npm install -g @grafana-ps/tools
 $ grot COMMAND
 running command...
 $ grot (--version)
-@grafana-ps/tools/0.1.1 linux-x64 node-v20.19.2
+@grafana-ps/tools/0.2.0 linux-x64 node-v20.19.2
 $ grot --help [COMMAND]
 USAGE
   $ grot COMMAND
@@ -63,7 +63,7 @@ DESCRIPTION
   full validation of values.yaml
 ```
 
-_See code: [src/commands/check/k8s-monitoring/values.ts](https://github.com/grafana-ps/tools/blob/v0.1.1/src/commands/check/k8s-monitoring/values.ts)_
+_See code: [src/commands/check/k8s-monitoring/values.ts](https://github.com/grafana-ps/tools/blob/v0.2.0/src/commands/check/k8s-monitoring/values.ts)_
 
 ## `grot check k8s-monitoring values cluster FILE`
 
@@ -80,7 +80,7 @@ DESCRIPTION
   validate .cluster
 ```
 
-_See code: [src/commands/check/k8s-monitoring/values/cluster.ts](https://github.com/grafana-ps/tools/blob/v0.1.1/src/commands/check/k8s-monitoring/values/cluster.ts)_
+_See code: [src/commands/check/k8s-monitoring/values/cluster.ts](https://github.com/grafana-ps/tools/blob/v0.2.0/src/commands/check/k8s-monitoring/values/cluster.ts)_
 
 ## `grot check k8s-monitoring values destinations FILE`
 
@@ -101,7 +101,7 @@ DESCRIPTION
   validate .destinations
 ```
 
-_See code: [src/commands/check/k8s-monitoring/values/destinations.ts](https://github.com/grafana-ps/tools/blob/v0.1.1/src/commands/check/k8s-monitoring/values/destinations.ts)_
+_See code: [src/commands/check/k8s-monitoring/values/destinations.ts](https://github.com/grafana-ps/tools/blob/v0.2.0/src/commands/check/k8s-monitoring/values/destinations.ts)_
 
 ## `grot help [COMMAND]`
 
