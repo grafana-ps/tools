@@ -4,8 +4,11 @@ import {
   Flags,
 } from '@oclif/core'
 import _ from 'lodash'
-import * as emoji from 'node-emoji'
+import {
+  emojify as em
+} from 'node-emoji'
 import fs from 'node:fs'
+import ora from 'ora'
 import {
   isNode,
   isSeq,
@@ -83,8 +86,8 @@ export default class CheckK8sMonitoringValuesDestinations extends Command {
       this.error(`${prefix} Missing auth.password`)
     }
 
-    this.log(emoji.emojify(`:heavy_check_mark: ${prefix} Destination is valid`))
-    this.log(emoji.emojify(`:white_circle: ${prefix} Testing write to Grafana Cloud...`))
+    this.log(em(`:heavy_check_mark:${prefix} Destination is valid`))
+    const spinner = ora(`${prefix} Testing write to Grafana Cloud...`).start()
 
     try {
       if (type === 'prometheus') {
@@ -99,10 +102,11 @@ export default class CheckK8sMonitoringValuesDestinations extends Command {
         await writeTrace(username, password, url)
       }
     } catch (error) {
-      this.error(`${prefix} test write to Grafana Cloud failed: \n\n${error}`)
+      spinner.fail(`${prefix} test write to Grafana Cloud failed: \n\n${error}`)
     }
 
-    this.log(emoji.emojify(`:white_check_mark: ${prefix} Test write to Grafana Cloud successful`))
+    spinner.succeed(`${prefix} Test write to Grafana Cloud successful`)
+    this.log()
   }
 
 
@@ -112,7 +116,7 @@ export default class CheckK8sMonitoringValuesDestinations extends Command {
     const {file} = args
     const {types} = flags
 
-    this.log(emoji.emojify(`:white_circle: Validating .destinations for ${file}`))
+    this.log(`Validating .destinations for ${file}`)
 
     const v = parseDocument(fs.readFileSync(file, 'utf8'))
 
@@ -135,16 +139,21 @@ export default class CheckK8sMonitoringValuesDestinations extends Command {
     }
 
     for await (const type of types) {
-      this.log(emoji.emojify(`\n:white_circle: Checking for ${type} destinations:`))
+      const spinner = ora(`Checking for ${type} destinations...`).start()
       const found = destinations.toJSON().filter((d) => _.get(d, 'type') === type)
 
       if (found.length === 0) {
-        this.error(`Missing ${type} destination`)
+        spinner.fail(`No ${type} destinations found`)
       }
+
+      spinner.succeed(`Found ${found.length} ${type} destinations`)
 
       for await (const d of found) {
         await this.checkDestination(d)
       }
     }
+
+    this.log(em(':heavy_check_mark:.destinations is valid'))
+    this.log()
   }
 }

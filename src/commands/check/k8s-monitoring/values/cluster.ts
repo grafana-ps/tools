@@ -3,7 +3,9 @@ import {
   Command,
 } from '@oclif/core'
 import _ from 'lodash'
-import * as emoji from 'node-emoji'
+import {
+  emojify as em
+} from 'node-emoji'
 import fs from 'node:fs'
 import {
   isMap,
@@ -25,7 +27,7 @@ export default class CheckK8sMonitoringCluster extends Command {
 
     const {file} = args
 
-    this.log(emoji.emojify(`:white_circle: Validating .cluster for ${file}`))
+    this.log(`Validating .cluster for ${file}`)
 
     const v = parseDocument(fs.readFileSync(file, 'utf8'))
 
@@ -45,8 +47,10 @@ export default class CheckK8sMonitoringCluster extends Command {
       this.error('.cluster.name must be a string')
     }
 
-    this.log(emoji.emojify(`:heavy_check_mark: .cluster.name is valid`))
+    this.log(em(`:heavy_check_mark:.cluster.name is valid`))
+    this.log()
 
-    this.log(emoji.emojify(`:white_check_mark: .cluster is valid`))
+    this.log(em(`:heavy_check_mark:.cluster is valid`))
+    this.log()
   }
 }
