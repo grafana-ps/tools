@@ -30,6 +30,7 @@ USAGE
 # Commands
 <!-- commands -->
 * [`grot check k8s-monitoring values FILE`](#grot-check-k8s-monitoring-values-file)
+* [`grot check k8s-monitoring values alloy-logs FILE`](#grot-check-k8s-monitoring-values-alloy-logs-file)
 * [`grot check k8s-monitoring values alloy-metrics FILE`](#grot-check-k8s-monitoring-values-alloy-metrics-file)
 * [`grot check k8s-monitoring values cluster FILE`](#grot-check-k8s-monitoring-values-cluster-file)
 * [`grot check k8s-monitoring values destinations FILE`](#grot-check-k8s-monitoring-values-destinations-file)
@@ -65,6 +66,23 @@ DESCRIPTION
 ```
 
 _See code: [src/commands/check/k8s-monitoring/values.ts](https://github.com/grafana-ps/tools/blob/v0.2.0/src/commands/check/k8s-monitoring/values.ts)_
+
+## `grot check k8s-monitoring values alloy-logs FILE`
+
+validate .alloy-logs
+
+```
+USAGE
+  $ grot check k8s-monitoring values alloy-logs FILE
+
+ARGUMENTS
+  FILE  file to read
+
+DESCRIPTION
+  validate .alloy-logs
+```
+
+_See code: [src/commands/check/k8s-monitoring/values/alloy-logs.ts](https://github.com/grafana-ps/tools/blob/v0.2.0/src/commands/check/k8s-monitoring/values/alloy-logs.ts)_
 
 ## `grot check k8s-monitoring values alloy-metrics FILE`
 
