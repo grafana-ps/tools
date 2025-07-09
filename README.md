@@ -37,6 +37,8 @@ USAGE
 * [`grot check k8s-monitoring values clusterEvents FILE`](#grot-check-k8s-monitoring-values-clusterevents-file)
 * [`grot check k8s-monitoring values clusterMetrics FILE`](#grot-check-k8s-monitoring-values-clustermetrics-file)
 * [`grot check k8s-monitoring values destinations FILE`](#grot-check-k8s-monitoring-values-destinations-file)
+* [`grot check k8s-monitoring values nodeLogs FILE`](#grot-check-k8s-monitoring-values-nodelogs-file)
+* [`grot check k8s-monitoring values podLogs FILE`](#grot-check-k8s-monitoring-values-podlogs-file)
 * [`grot help [COMMAND]`](#grot-help-command)
 * [`grot plugins`](#grot-plugins)
 * [`grot plugins add PLUGIN`](#grot-plugins-add-plugin)
@@ -192,6 +194,40 @@ DESCRIPTION
 ```
 
 _See code: [src/commands/check/k8s-monitoring/values/destinations.ts](https://github.com/grafana-ps/tools/blob/v0.2.0/src/commands/check/k8s-monitoring/values/destinations.ts)_
+
+## `grot check k8s-monitoring values nodeLogs FILE`
+
+validate .nodeLogs
+
+```
+USAGE
+  $ grot check k8s-monitoring values nodeLogs FILE
+
+ARGUMENTS
+  FILE  file to read
+
+DESCRIPTION
+  validate .nodeLogs
+```
+
+_See code: [src/commands/check/k8s-monitoring/values/nodeLogs.ts](https://github.com/grafana-ps/tools/blob/v0.2.0/src/commands/check/k8s-monitoring/values/nodeLogs.ts)_
+
+## `grot check k8s-monitoring values podLogs FILE`
+
+validate .podLogs
+
+```
+USAGE
+  $ grot check k8s-monitoring values podLogs FILE
+
+ARGUMENTS
+  FILE  file to read
+
+DESCRIPTION
+  validate .podLogs
+```
+
+_See code: [src/commands/check/k8s-monitoring/values/podLogs.ts](https://github.com/grafana-ps/tools/blob/v0.2.0/src/commands/check/k8s-monitoring/values/podLogs.ts)_
 
 ## `grot help [COMMAND]`
 
