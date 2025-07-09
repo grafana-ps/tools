@@ -48,7 +48,6 @@ export default class CheckK8sMonitoringCluster extends Command {
     }
 
     this.log(em(`:heavy_check_mark:.cluster.name is valid`))
-    this.log()
 
     this.log(em(`:heavy_check_mark:.cluster is valid`))
     this.log()

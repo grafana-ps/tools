@@ -35,6 +35,7 @@ export default class CheckK8sMonitoringValues extends Command {
     const {types} = flags
 
     await this.config.runCommand('check:k8s-monitoring:values:cluster', [file])
+    await this.config.runCommand('check:k8s-monitoring:values:alloy-metrics', [file])
     await this.config.runCommand('check:k8s-monitoring:values:destinations', [
       file,
       `-t ${types.join(',')}`,
