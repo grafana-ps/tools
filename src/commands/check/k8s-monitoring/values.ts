@@ -38,6 +38,7 @@ export default class CheckK8sMonitoringValues extends Command {
     await this.config.runCommand('check:k8s-monitoring:values:alloy-metrics', [file])
     await this.config.runCommand('check:k8s-monitoring:values:alloy-logs', [file])
     await this.config.runCommand('check:k8s-monitoring:values:alloy-singleton', [file])
+    await this.config.runCommand('check:k8s-monitoring:values:cluster-metrics', [file])
     await this.config.runCommand('check:k8s-monitoring:values:destinations', [
       file,
       `-t ${types.join(',')}`,
