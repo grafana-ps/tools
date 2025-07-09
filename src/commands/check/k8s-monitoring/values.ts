@@ -40,6 +40,7 @@ export default class CheckK8sMonitoringValues extends Command {
     await this.config.runCommand('check:k8s-monitoring:values:alloy-singleton', [file])
     await this.config.runCommand('check:k8s-monitoring:values:clusterMetrics', [file])
     await this.config.runCommand('check:k8s-monitoring:values:clusterEvents', [file])
+    await this.config.runCommand('check:k8s-monitoring:values:annotationAutodiscovery', [file])
     await this.config.runCommand('check:k8s-monitoring:values:podLogs', [file])
     await this.config.runCommand('check:k8s-monitoring:values:nodeLogs', [file])
     await this.config.runCommand('check:k8s-monitoring:values:destinations', [
