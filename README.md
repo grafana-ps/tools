@@ -20,7 +20,7 @@ $ npm install -g @grafana-ps/tools
 $ grot COMMAND
 running command...
 $ grot (--version)
-@grafana-ps/tools/0.2.0 linux-x64 node-v20.19.2
+@grafana-ps/tools/0.2.0 linux-x64 node-v20.19.3
 $ grot --help [COMMAND]
 USAGE
   $ grot COMMAND
@@ -30,6 +30,7 @@ USAGE
 # Commands
 <!-- commands -->
 * [`grot check k8s-monitoring values FILE`](#grot-check-k8s-monitoring-values-file)
+* [`grot check k8s-monitoring values alloy-metrics FILE`](#grot-check-k8s-monitoring-values-alloy-metrics-file)
 * [`grot check k8s-monitoring values cluster FILE`](#grot-check-k8s-monitoring-values-cluster-file)
 * [`grot check k8s-monitoring values destinations FILE`](#grot-check-k8s-monitoring-values-destinations-file)
 * [`grot help [COMMAND]`](#grot-help-command)
@@ -64,6 +65,23 @@ DESCRIPTION
 ```
 
 _See code: [src/commands/check/k8s-monitoring/values.ts](https://github.com/grafana-ps/tools/blob/v0.2.0/src/commands/check/k8s-monitoring/values.ts)_
+
+## `grot check k8s-monitoring values alloy-metrics FILE`
+
+validate .alloy-metrics
+
+```
+USAGE
+  $ grot check k8s-monitoring values alloy-metrics FILE
+
+ARGUMENTS
+  FILE  file to read
+
+DESCRIPTION
+  validate .alloy-metrics
+```
+
+_See code: [src/commands/check/k8s-monitoring/values/alloy-metrics.ts](https://github.com/grafana-ps/tools/blob/v0.2.0/src/commands/check/k8s-monitoring/values/alloy-metrics.ts)_
 
 ## `grot check k8s-monitoring values cluster FILE`
 
