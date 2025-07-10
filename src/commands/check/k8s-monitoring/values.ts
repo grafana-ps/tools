@@ -35,14 +35,21 @@ export default class CheckK8sMonitoringValues extends Command {
     const {types} = flags
 
     await this.config.runCommand('check:k8s-monitoring:values:cluster', [file])
-    await this.config.runCommand('check:k8s-monitoring:values:alloy-metrics', [file])
-    await this.config.runCommand('check:k8s-monitoring:values:alloy-logs', [file])
-    await this.config.runCommand('check:k8s-monitoring:values:alloy-singleton', [file])
-    await this.config.runCommand('check:k8s-monitoring:values:clusterMetrics', [file])
-    await this.config.runCommand('check:k8s-monitoring:values:clusterEvents', [file])
-    await this.config.runCommand('check:k8s-monitoring:values:annotationAutodiscovery', [file])
-    await this.config.runCommand('check:k8s-monitoring:values:podLogs', [file])
-    await this.config.runCommand('check:k8s-monitoring:values:nodeLogs', [file])
+
+    if (types.includes('prometheus')) {
+      await this.config.runCommand('check:k8s-monitoring:values:alloy-metrics', [file])
+      await this.config.runCommand('check:k8s-monitoring:values:clusterMetrics', [file])
+      await this.config.runCommand('check:k8s-monitoring:values:annotationAutodiscovery', [file])
+    }
+
+    if (types.includes('loki')) {
+      await this.config.runCommand('check:k8s-monitoring:values:alloy-logs', [file])
+      await this.config.runCommand('check:k8s-monitoring:values:alloy-singleton', [file])
+      await this.config.runCommand('check:k8s-monitoring:values:clusterEvents', [file])
+      await this.config.runCommand('check:k8s-monitoring:values:podLogs', [file])
+      await this.config.runCommand('check:k8s-monitoring:values:nodeLogs', [file])
+    }
+
     await this.config.runCommand('check:k8s-monitoring:values:destinations', [
       file,
       `-t ${types.join(',')}`,
