@@ -86,6 +86,10 @@ export default class CheckK8sMonitoringValuesDestinations extends Command {
       this.error(`${prefix} Missing auth.password`)
     }
 
+    if (type === 'otlp') {
+       this.checkOtlp(d)
+    }
+
     this.log(em(`:heavy_check_mark:${prefix} Destination is valid`))
     const spinner = ora(`${prefix} Testing write to Grafana Cloud...`).start()
 
@@ -109,6 +113,22 @@ export default class CheckK8sMonitoringValuesDestinations extends Command {
     this.log()
   }
 
+  public checkOtlp(d): void {
+    const prefix = `otlp: ${_.get(d, 'name')}:`
+    const isGrafanaCloud = _.get(d, 'url').includes('grafana.net')
+
+    if (isGrafanaCloud) {
+      if (!_.has(d, 'protocol')) {
+        this.error(`${prefix} protocol must be explicitly set to "http" for Grafana Cloud (default: "grpc")`)
+      }
+
+      const protocol = _.get(d, 'protocol')
+
+      if (protocol !== 'http') {
+        this.error(`${prefix} protocol must be "http" for Grafana Cloud`)
+      }
+    }
+  }
 
   public async run(): Promise<void> {
     const {args, flags} = await this.parse(CheckK8sMonitoringValuesDestinations)
