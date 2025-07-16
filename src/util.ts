@@ -1,4 +1,6 @@
-import optl from '@opentelemetry/api'
+import {
+  trace,
+} from '@opentelemetry/api'
 import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http'
 import { resourceFromAttributes } from '@opentelemetry/resources'
 import {
@@ -8,6 +10,7 @@ import {
   ATTR_SERVICE_NAME,
   ATTR_SERVICE_VERSION,
 } from '@opentelemetry/semantic-conventions'
+import jaeger from 'jaeger-client'
 import {
   pushMetrics,
 } from 'prometheus-remote-write'
@@ -72,25 +75,51 @@ export async function writeTrace(
   username: string,
   password: string,
   url: string,
+  format = 'otlp',
 ): Promise<void> {
-  const traceExporter = new OTLPTraceExporter({
-    headers: createHeaders(username, password),
-    url,
-  })
+  if (format === 'otlp') {
+    const traceExporter = new OTLPTraceExporter({
+      headers: createHeaders(username, password),
+      url,
+    })
 
-  const sdk = new NodeSDK({
-    resource: resourceFromAttributes({
-      [ATTR_SERVICE_NAME]: 'grot-check',
-      [ATTR_SERVICE_VERSION]: '12.13.1989',
-    }),
-    traceExporter,
-  })
+    const sdk = new NodeSDK({
+      resource: resourceFromAttributes({
+        [ATTR_SERVICE_NAME]: 'grot-check',
+        [ATTR_SERVICE_VERSION]: '12.13.1989',
+      }),
+      traceExporter,
+    })
 
-  await sdk.start()
+    await sdk.start()
 
-  const tracer = optl.trace.getTracer('grot-check', '12.13.1989')
-  const span = tracer.startSpan('grot-check')
-  span.end()
+    const tracer = trace.getTracer('grot-check', '12.13.1989')
+    const span = tracer.startSpan('grot-check')
+    span.end()
 
-  await sdk.shutdown()
+    return sdk.shutdown()
+  }
+
+  if (format === 'jaeger') {
+    const jaegerTracer = jaeger.initTracer({
+      reporter: {
+        collectorEndpoint: url,
+      },
+      sampler: {
+        param: 1,
+        type: jaeger.ConstSampler,
+      },
+      serviceName: 'grot-check',
+    }, {
+      tags: {
+        'service.version': '12.13.1989',
+      }
+    })
+
+    jaegerTracer.startSpan('grot-check').finish()
+
+    return jaegerTracer.close()
+  }
+
+  throw new Error('Unknown format')
 }

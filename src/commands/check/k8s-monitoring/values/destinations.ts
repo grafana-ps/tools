@@ -106,7 +106,8 @@ export default class CheckK8sMonitoringValuesDestinations extends Command {
         await writeTrace(username, password, url)
       }
     } catch (error) {
-      spinner.fail(`${prefix} test write to Grafana Cloud failed: \n\n${error}`)
+      spinner.fail(`${prefix} Test write to Grafana Cloud failed: \n\n${error}`)
+      this.error(`${prefix} Test write to Grafana Cloud failed: \n\n${error}`)
     }
 
     spinner.succeed(`${prefix} Test write to Grafana Cloud successful`)
@@ -164,6 +165,7 @@ export default class CheckK8sMonitoringValuesDestinations extends Command {
 
       if (found.length === 0) {
         spinner.fail(`No ${type} destinations found`)
+        this.error(`No ${type} destinations found`)
       }
 
       spinner.succeed(`Found ${found.length} ${type} destinations`)
