@@ -12,6 +12,9 @@ import {
 } from '@opentelemetry/semantic-conventions'
 import jaeger from 'jaeger-client'
 import {
+  URL,
+} from 'node:url'
+import {
   pushMetrics,
 } from 'prometheus-remote-write'
 
@@ -78,9 +81,15 @@ export async function writeTrace(
   format = 'otlp',
 ): Promise<void> {
   if (format === 'otlp') {
+    const u = new URL(url)
+
+    if (u.pathname.endsWith('otlp')) {
+      u.pathname = `${u.pathname}/v1/traces`
+    }
+
     const traceExporter = new OTLPTraceExporter({
       headers: createHeaders(username, password),
-      url,
+      url: u.toString(),
     })
 
     const sdk = new NodeSDK({

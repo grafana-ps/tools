@@ -8,6 +8,9 @@ import {
   emojify as em
 } from 'node-emoji'
 import fs from 'node:fs'
+import {
+  URL,
+} from 'node:url'
 import ora from 'ora'
 import {
   isNode,
@@ -87,7 +90,7 @@ export default class CheckK8sMonitoringValuesDestinations extends Command {
     }
 
     if (type === 'otlp') {
-       this.checkOtlp(d)
+       this.checkOtlp(d, url)
     }
 
     this.log(em(`:heavy_check_mark:${prefix} Destination is valid`))
@@ -114,20 +117,27 @@ export default class CheckK8sMonitoringValuesDestinations extends Command {
     this.log()
   }
 
-  public checkOtlp(d): void {
+  public checkOtlp(d, url): void {
     const prefix = `otlp: ${_.get(d, 'name')}:`
-    const isGrafanaCloud = _.get(d, 'url').includes('grafana.net')
+    const u = new URL(url)
+    const isGrafanaCloud = u.hostname.includes('grafana.net')
 
-    if (isGrafanaCloud) {
-      if (!_.has(d, 'protocol')) {
-        this.error(`${prefix} protocol must be explicitly set to "http" for Grafana Cloud (default: "grpc")`)
-      }
+    if (!isGrafanaCloud) {
+      return
+    }
 
-      const protocol = _.get(d, 'protocol')
+    if (!_.has(d, 'protocol')) {
+      this.error(`${prefix} protocol must be explicitly set to "http" for Grafana Cloud (default: "grpc")`)
+    }
 
-      if (protocol !== 'http') {
-        this.error(`${prefix} protocol must be "http" for Grafana Cloud`)
-      }
+    const protocol = _.get(d, 'protocol')
+
+    if (protocol !== 'http') {
+      this.error(`${prefix} protocol must be "http" for Grafana Cloud`)
+    }
+
+    if (u.pathname !== '/otlp') {
+      this.error(`${prefix} path must be "/otlp" for Grafana Cloud`)
     }
   }
 
