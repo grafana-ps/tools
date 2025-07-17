@@ -50,6 +50,10 @@ export default class CheckK8sMonitoringValues extends Command {
       await this.config.runCommand('check:k8s-monitoring:values:nodeLogs', [file])
     }
 
+    if (types.includes('otlp')) {
+      await this.config.runCommand('check:k8s-monitoring:values:alloy-receiver', [file])
+    }
+
     await this.config.runCommand('check:k8s-monitoring:values:destinations', [
       file,
       `-t ${types.join(',')}`,
