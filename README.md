@@ -20,7 +20,7 @@ $ npm install -g @grafana-ps/tools
 $ grot COMMAND
 running command...
 $ grot (--version)
-@grafana-ps/tools/0.4.0 linux-x64 node-v23.11.1
+@grafana-ps/tools/0.4.0 linux-x64 node-v20.19.3
 $ grot --help [COMMAND]
 USAGE
   $ grot COMMAND
@@ -32,6 +32,7 @@ USAGE
 * [`grot check k8s-monitoring values FILE`](#grot-check-k8s-monitoring-values-file)
 * [`grot check k8s-monitoring values alloy-logs FILE`](#grot-check-k8s-monitoring-values-alloy-logs-file)
 * [`grot check k8s-monitoring values alloy-metrics FILE`](#grot-check-k8s-monitoring-values-alloy-metrics-file)
+* [`grot check k8s-monitoring values alloy-receiver FILE`](#grot-check-k8s-monitoring-values-alloy-receiver-file)
 * [`grot check k8s-monitoring values alloy-singleton FILE`](#grot-check-k8s-monitoring-values-alloy-singleton-file)
 * [`grot check k8s-monitoring values annotationAutodiscovery FILE`](#grot-check-k8s-monitoring-values-annotationautodiscovery-file)
 * [`grot check k8s-monitoring values cluster FILE`](#grot-check-k8s-monitoring-values-cluster-file)
@@ -106,6 +107,23 @@ DESCRIPTION
 ```
 
 _See code: [src/commands/check/k8s-monitoring/values/alloy-metrics.ts](https://github.com/grafana-ps/tools/blob/v0.4.0/src/commands/check/k8s-monitoring/values/alloy-metrics.ts)_
+
+## `grot check k8s-monitoring values alloy-receiver FILE`
+
+validate .alloy-receiver
+
+```
+USAGE
+  $ grot check k8s-monitoring values alloy-receiver FILE
+
+ARGUMENTS
+  FILE  file to read
+
+DESCRIPTION
+  validate .alloy-receiver
+```
+
+_See code: [src/commands/check/k8s-monitoring/values/alloy-receiver.ts](https://github.com/grafana-ps/tools/blob/v0.4.0/src/commands/check/k8s-monitoring/values/alloy-receiver.ts)_
 
 ## `grot check k8s-monitoring values alloy-singleton FILE`
 
