@@ -20,7 +20,7 @@ $ npm install -g @grafana-ps/tools
 $ grot COMMAND
 running command...
 $ grot (--version)
-@grafana-ps/tools/0.5.1 linux-x64 node-v23.11.1
+@grafana-ps/tools/0.5.1 linux-x64 node-v20.19.3
 $ grot --help [COMMAND]
 USAGE
   $ grot COMMAND
@@ -41,6 +41,11 @@ USAGE
 * [`grot check k8s-monitoring values destinations FILE`](#grot-check-k8s-monitoring-values-destinations-file)
 * [`grot check k8s-monitoring values nodeLogs FILE`](#grot-check-k8s-monitoring-values-nodelogs-file)
 * [`grot check k8s-monitoring values podLogs FILE`](#grot-check-k8s-monitoring-values-podlogs-file)
+* [`grot check lgtm values FILE`](#grot-check-lgtm-values-file)
+* [`grot check lgtm values api FILE`](#grot-check-lgtm-values-api-file)
+* [`grot check lgtm values authenticator FILE`](#grot-check-lgtm-values-authenticator-file)
+* [`grot check lgtm values loadGenerator FILE`](#grot-check-lgtm-values-loadgenerator-file)
+* [`grot check lgtm values opentelemetry FILE`](#grot-check-lgtm-values-opentelemetry-file)
 * [`grot help [COMMAND]`](#grot-help-command)
 * [`grot plugins`](#grot-plugins)
 * [`grot plugins add PLUGIN`](#grot-plugins-add-plugin)
@@ -264,6 +269,107 @@ DESCRIPTION
 ```
 
 _See code: [src/commands/check/k8s-monitoring/values/podLogs.ts](https://github.com/grafana-ps/tools/blob/v0.5.1/src/commands/check/k8s-monitoring/values/podLogs.ts)_
+
+## `grot check lgtm values FILE`
+
+full validation of values.yaml
+
+```
+USAGE
+  $ grot check lgtm values FILE [-t prometheus|otlp...]
+
+ARGUMENTS
+  FILE  values file to validate
+
+FLAGS
+  -t, --telemetry=<option>...  [default: prometheus,otlp] types of telmetry to validate
+                               <options: prometheus|otlp>
+
+DESCRIPTION
+  full validation of values.yaml
+```
+
+_See code: [src/commands/check/lgtm/values.ts](https://github.com/grafana-ps/tools/blob/v0.5.1/src/commands/check/lgtm/values.ts)_
+
+## `grot check lgtm values api FILE`
+
+validate .api
+
+```
+USAGE
+  $ grot check lgtm values api FILE [-t prometheus|otlp...]
+
+ARGUMENTS
+  FILE  file to read
+
+FLAGS
+  -t, --telemetry=<option>...  [default: prometheus,otlp] types of telmetry to validate
+                               <options: prometheus|otlp>
+
+DESCRIPTION
+  validate .api
+```
+
+_See code: [src/commands/check/lgtm/values/api.ts](https://github.com/grafana-ps/tools/blob/v0.5.1/src/commands/check/lgtm/values/api.ts)_
+
+## `grot check lgtm values authenticator FILE`
+
+validate .authenticator
+
+```
+USAGE
+  $ grot check lgtm values authenticator FILE [-t prometheus|otlp...]
+
+ARGUMENTS
+  FILE  file to read
+
+FLAGS
+  -t, --telemetry=<option>...  [default: prometheus,otlp] types of telmetry to validate
+                               <options: prometheus|otlp>
+
+DESCRIPTION
+  validate .authenticator
+```
+
+_See code: [src/commands/check/lgtm/values/authenticator.ts](https://github.com/grafana-ps/tools/blob/v0.5.1/src/commands/check/lgtm/values/authenticator.ts)_
+
+## `grot check lgtm values loadGenerator FILE`
+
+validate .loadGenerator
+
+```
+USAGE
+  $ grot check lgtm values loadGenerator FILE [-t prometheus|otlp...]
+
+ARGUMENTS
+  FILE  file to read
+
+FLAGS
+  -t, --telemetry=<option>...  [default: prometheus,otlp] types of telmetry to validate
+                               <options: prometheus|otlp>
+
+DESCRIPTION
+  validate .loadGenerator
+```
+
+_See code: [src/commands/check/lgtm/values/loadGenerator.ts](https://github.com/grafana-ps/tools/blob/v0.5.1/src/commands/check/lgtm/values/loadGenerator.ts)_
+
+## `grot check lgtm values opentelemetry FILE`
+
+validate .opentelemetry
+
+```
+USAGE
+  $ grot check lgtm values opentelemetry FILE
+
+ARGUMENTS
+  FILE  file to read
+
+DESCRIPTION
+  validate .opentelemetry
+```
+
+_See code: [src/commands/check/lgtm/values/opentelemetry.ts](https://github.com/grafana-ps/tools/blob/v0.5.1/src/commands/check/lgtm/values/opentelemetry.ts)_
 
 ## `grot help [COMMAND]`
 
