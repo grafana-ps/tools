@@ -20,7 +20,7 @@ $ npm install -g @grafana-ps/tools
 $ grot COMMAND
 running command...
 $ grot (--version)
-@grafana-ps/tools/0.6.0 linux-x64 node-v22.17.1
+@grafana-ps/tools/0.6.0 linux-x64 node-v20.19.4
 $ grot --help [COMMAND]
 USAGE
   $ grot COMMAND
@@ -29,6 +29,7 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`grot check cloud token read SLUG FILE`](#grot-check-cloud-token-read-slug-file)
 * [`grot check k8s-monitoring values FILE`](#grot-check-k8s-monitoring-values-file)
 * [`grot check k8s-monitoring values alloy-logs FILE`](#grot-check-k8s-monitoring-values-alloy-logs-file)
 * [`grot check k8s-monitoring values alloy-metrics FILE`](#grot-check-k8s-monitoring-values-alloy-metrics-file)
@@ -57,6 +58,27 @@ USAGE
 * [`grot plugins uninstall [PLUGIN]`](#grot-plugins-uninstall-plugin)
 * [`grot plugins unlink [PLUGIN]`](#grot-plugins-unlink-plugin)
 * [`grot plugins update`](#grot-plugins-update)
+
+## `grot check cloud token read SLUG FILE`
+
+validate token read access
+
+```
+USAGE
+  $ grot check cloud token read SLUG FILE [--stackToken <value>]
+
+ARGUMENTS
+  SLUG  stack slug to use
+  FILE  file to read
+
+FLAGS
+  --stackToken=<value>  token with stack access
+
+DESCRIPTION
+  validate token read access
+```
+
+_See code: [src/commands/check/cloud/token/read.ts](https://github.com/grafana-ps/tools/blob/v0.6.0/src/commands/check/cloud/token/read.ts)_
 
 ## `grot check k8s-monitoring values FILE`
 
