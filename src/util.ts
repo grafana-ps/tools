@@ -11,6 +11,7 @@ import {
   ATTR_SERVICE_VERSION,
 } from '@opentelemetry/semantic-conventions'
 import jaeger from 'jaeger-client'
+import _ from 'lodash'
 import {
   URL,
 } from 'node:url'
@@ -18,12 +19,61 @@ import {
   pushMetrics,
 } from 'prometheus-remote-write'
 
-export function createHeaders(username, password) {
+export function createBearerHeaders(
+  token: string,
+) {
+  const bearerAuth = `Bearer ${token}`
+
+  return {
+    'Authorization': bearerAuth,
+    'Content-Type': 'application/json',
+  }
+}
+
+export function createBasicHeaders(
+  username: string,
+  password: string,
+) {
   const basicAuth = `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`
 
   return {
     'Authorization': basicAuth,
     'Content-Type': 'application/json',
+  }
+}
+
+export async function getInstance(
+  slug: string,
+  token: string,
+) {
+  const url = `https://grafana.com/api/instances/${slug}`
+
+  const response = await fetch(url, {
+    headers: createBearerHeaders(token),
+    method: 'GET',
+  })
+
+  const data = await response.json()
+
+  const instance = {
+    loki: {
+      id: _.toString(_.get(data, 'hlInstanceId')),
+      url: _.get(data, 'hlInstanceUrl'),
+    },
+    prometheus: {
+      id: _.toString(_.get(data, 'hmInstancePromId')),
+      url: _.get(data, 'hmInstancePromUrl'),
+    },
+    tempo: {
+      id: _.toString(_.get(data, 'htInstanceId')),
+      url: _.get(data, 'htInstanceUrl'),
+    },
+  }
+
+  return {
+    code: _.get(data, 'code'),
+    instance,
+    message: _.get(data, 'message'),
   }
 }
 
@@ -65,7 +115,7 @@ export async function writeLog(
 
   const response = await fetch(url, {
     body,
-    headers: createHeaders(username, password),
+    headers: createBasicHeaders(username, password),
     method: 'POST',
   })
 
@@ -88,7 +138,7 @@ export async function writeTrace(
     }
 
     const traceExporter = new OTLPTraceExporter({
-      headers: createHeaders(username, password),
+      headers: createBasicHeaders(username, password),
       url: u.toString(),
     })
 

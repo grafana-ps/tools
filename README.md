@@ -20,7 +20,7 @@ $ npm install -g @grafana-ps/tools
 $ grot COMMAND
 running command...
 $ grot (--version)
-@grafana-ps/tools/0.6.0 linux-x64 node-v20.19.3
+@grafana-ps/tools/0.6.0 linux-x64 node-v22.17.1
 $ grot --help [COMMAND]
 USAGE
   $ grot COMMAND
