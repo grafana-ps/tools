@@ -7,11 +7,13 @@ import _ from 'lodash'
 import {
   emojify as em
 } from 'node-emoji'
-import ora from 'ora'
 import fs from 'node:fs'
+import ora from 'ora'
 
 import {
+  formatMetrics,
   getInstance,
+  readMetrics,
 } from '../../../../util.js'
 
 export default class CheckCloudTokenRead extends Command {
@@ -65,6 +67,24 @@ export default class CheckCloudTokenRead extends Command {
     spinner.succeed(
       `Found stack details: ${JSON.stringify(instance, null, 2)}`,
     )
+
+    return instance
+  }
+
+  public async readMetrics(
+    username: string,
+    password: string,
+    url: string,
+  ) {
+    const spinner = ora(`Reading metrics [${url}] u:${username}...`).start()
+
+    const data = await readMetrics(
+      username,
+      password,
+      `${url}/api/prom/api/v1`,
+    )
+
+    spinner.succeed(`Read metrics: \n${formatMetrics(data)}`)
   }
 
   public async run(): Promise<void> {
@@ -88,9 +108,15 @@ export default class CheckCloudTokenRead extends Command {
       this.error('TODO: add access without stack token')
     }
 
-    await this.getStack(
+    const instance = await this.getStack(
       slug,
       fs.readFileSync(stackToken, 'utf8'),
+    )
+
+    await this.readMetrics(
+      _.get(instance, 'prometheus.id'),
+      token,
+      _.get(instance, 'prometheus.url'),
     )
 
     this.log(em(`:heavy_check_mark:Token is valid`))

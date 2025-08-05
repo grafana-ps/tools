@@ -19,6 +19,28 @@ import {
   pushMetrics,
 } from 'prometheus-remote-write'
 
+export function now() {
+  return Math.floor(Date.now() / 1000).toString()
+}
+
+export function formatMetrics(metrics) {
+  return metrics.map((i) => {
+    const {
+      metric,
+      value,
+    } = i
+
+    const labels = _.toPairs(_.omit(metric, '__name__'))
+    const fl = labels.map((l) => {
+      const key = l[0]
+      const value = _.truncate(l[1], {length: 40})
+      return `    ${key}="${value}"`
+    }).join(',\n')
+
+    return `  ${_.get(metric, '__name__')}{\n${fl}\n  } ${value[1]}`
+  }).join('\n')
+}
+
 export function createBearerHeaders(
   token: string,
 ) {
@@ -75,6 +97,41 @@ export async function getInstance(
     instance,
     message: _.get(data, 'message'),
   }
+}
+
+export async function readMetrics(
+  username: string,
+  password: string,
+  url: string,
+) {
+  const u = new URL(url)
+  u.pathname = `${u.pathname}/query`
+  u.searchParams.set('query', 'up')
+  u.searchParams.set('time', now())
+
+  const response = await fetch(u.toString(), {
+    headers: createBasicHeaders(username, password),
+    method: 'GET',
+  })
+
+  const json = await response.json()
+
+  const {
+    data,
+    error,
+    errorType,
+    status,
+  } = json
+
+  if (status !== 'success') {
+    throw new Error(`${errorType}: ${error}`)
+  }
+
+  const {
+    result,
+  } = data
+
+  return result
 }
 
 export async function writeMetric(
