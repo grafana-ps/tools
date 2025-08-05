@@ -20,7 +20,7 @@ $ npm install -g @grafana-ps/tools
 $ grot COMMAND
 running command...
 $ grot (--version)
-@grafana-ps/tools/0.6.0 linux-x64 node-v20.19.4
+@grafana-ps/tools/0.7.0 linux-x64 node-v20.19.4
 $ grot --help [COMMAND]
 USAGE
   $ grot COMMAND
@@ -78,7 +78,7 @@ DESCRIPTION
   validate token read access
 ```
 
-_See code: [src/commands/check/cloud/token/read.ts](https://github.com/grafana-ps/tools/blob/v0.6.0/src/commands/check/cloud/token/read.ts)_
+_See code: [src/commands/check/cloud/token/read.ts](https://github.com/grafana-ps/tools/blob/v0.7.0/src/commands/check/cloud/token/read.ts)_
 
 ## `grot check k8s-monitoring values FILE`
 
@@ -99,7 +99,7 @@ DESCRIPTION
   full validation of values.yaml
 ```
 
-_See code: [src/commands/check/k8s-monitoring/values.ts](https://github.com/grafana-ps/tools/blob/v0.6.0/src/commands/check/k8s-monitoring/values.ts)_
+_See code: [src/commands/check/k8s-monitoring/values.ts](https://github.com/grafana-ps/tools/blob/v0.7.0/src/commands/check/k8s-monitoring/values.ts)_
 
 ## `grot check k8s-monitoring values alloy-logs FILE`
 
@@ -116,7 +116,7 @@ DESCRIPTION
   validate .alloy-logs
 ```
 
-_See code: [src/commands/check/k8s-monitoring/values/alloy-logs.ts](https://github.com/grafana-ps/tools/blob/v0.6.0/src/commands/check/k8s-monitoring/values/alloy-logs.ts)_
+_See code: [src/commands/check/k8s-monitoring/values/alloy-logs.ts](https://github.com/grafana-ps/tools/blob/v0.7.0/src/commands/check/k8s-monitoring/values/alloy-logs.ts)_
 
 ## `grot check k8s-monitoring values alloy-metrics FILE`
 
@@ -133,7 +133,7 @@ DESCRIPTION
   validate .alloy-metrics
 ```
 
-_See code: [src/commands/check/k8s-monitoring/values/alloy-metrics.ts](https://github.com/grafana-ps/tools/blob/v0.6.0/src/commands/check/k8s-monitoring/values/alloy-metrics.ts)_
+_See code: [src/commands/check/k8s-monitoring/values/alloy-metrics.ts](https://github.com/grafana-ps/tools/blob/v0.7.0/src/commands/check/k8s-monitoring/values/alloy-metrics.ts)_
 
 ## `grot check k8s-monitoring values alloy-receiver FILE`
 
@@ -150,7 +150,7 @@ DESCRIPTION
   validate .alloy-receiver
 ```
 
-_See code: [src/commands/check/k8s-monitoring/values/alloy-receiver.ts](https://github.com/grafana-ps/tools/blob/v0.6.0/src/commands/check/k8s-monitoring/values/alloy-receiver.ts)_
+_See code: [src/commands/check/k8s-monitoring/values/alloy-receiver.ts](https://github.com/grafana-ps/tools/blob/v0.7.0/src/commands/check/k8s-monitoring/values/alloy-receiver.ts)_
 
 ## `grot check k8s-monitoring values alloy-singleton FILE`
 
@@ -167,7 +167,7 @@ DESCRIPTION
   validate .alloy-singleton
 ```
 
-_See code: [src/commands/check/k8s-monitoring/values/alloy-singleton.ts](https://github.com/grafana-ps/tools/blob/v0.6.0/src/commands/check/k8s-monitoring/values/alloy-singleton.ts)_
+_See code: [src/commands/check/k8s-monitoring/values/alloy-singleton.ts](https://github.com/grafana-ps/tools/blob/v0.7.0/src/commands/check/k8s-monitoring/values/alloy-singleton.ts)_
 
 ## `grot check k8s-monitoring values annotationAutodiscovery FILE`
 
@@ -184,7 +184,7 @@ DESCRIPTION
   validate .annotationAutodiscovery
 ```
 
-_See code: [src/commands/check/k8s-monitoring/values/annotationAutodiscovery.ts](https://github.com/grafana-ps/tools/blob/v0.6.0/src/commands/check/k8s-monitoring/values/annotationAutodiscovery.ts)_
+_See code: [src/commands/check/k8s-monitoring/values/annotationAutodiscovery.ts](https://github.com/grafana-ps/tools/blob/v0.7.0/src/commands/check/k8s-monitoring/values/annotationAutodiscovery.ts)_
 
 ## `grot check k8s-monitoring values cluster FILE`
 
@@ -201,7 +201,7 @@ DESCRIPTION
   validate .cluster
 ```
 
-_See code: [src/commands/check/k8s-monitoring/values/cluster.ts](https://github.com/grafana-ps/tools/blob/v0.6.0/src/commands/check/k8s-monitoring/values/cluster.ts)_
+_See code: [src/commands/check/k8s-monitoring/values/cluster.ts](https://github.com/grafana-ps/tools/blob/v0.7.0/src/commands/check/k8s-monitoring/values/cluster.ts)_
 
 ## `grot check k8s-monitoring values clusterEvents FILE`
 
@@ -218,7 +218,7 @@ DESCRIPTION
   validate .clusterEvents
 ```
 
-_See code: [src/commands/check/k8s-monitoring/values/clusterEvents.ts](https://github.com/grafana-ps/tools/blob/v0.6.0/src/commands/check/k8s-monitoring/values/clusterEvents.ts)_
+_See code: [src/commands/check/k8s-monitoring/values/clusterEvents.ts](https://github.com/grafana-ps/tools/blob/v0.7.0/src/commands/check/k8s-monitoring/values/clusterEvents.ts)_
 
 ## `grot check k8s-monitoring values clusterMetrics FILE`
 
@@ -235,7 +235,7 @@ DESCRIPTION
   validate .clusterMetrics
 ```
 
-_See code: [src/commands/check/k8s-monitoring/values/clusterMetrics.ts](https://github.com/grafana-ps/tools/blob/v0.6.0/src/commands/check/k8s-monitoring/values/clusterMetrics.ts)_
+_See code: [src/commands/check/k8s-monitoring/values/clusterMetrics.ts](https://github.com/grafana-ps/tools/blob/v0.7.0/src/commands/check/k8s-monitoring/values/clusterMetrics.ts)_
 
 ## `grot check k8s-monitoring values destinations FILE`
 
@@ -256,7 +256,7 @@ DESCRIPTION
   validate .destinations
 ```
 
-_See code: [src/commands/check/k8s-monitoring/values/destinations.ts](https://github.com/grafana-ps/tools/blob/v0.6.0/src/commands/check/k8s-monitoring/values/destinations.ts)_
+_See code: [src/commands/check/k8s-monitoring/values/destinations.ts](https://github.com/grafana-ps/tools/blob/v0.7.0/src/commands/check/k8s-monitoring/values/destinations.ts)_
 
 ## `grot check k8s-monitoring values nodeLogs FILE`
 
@@ -273,7 +273,7 @@ DESCRIPTION
   validate .nodeLogs
 ```
 
-_See code: [src/commands/check/k8s-monitoring/values/nodeLogs.ts](https://github.com/grafana-ps/tools/blob/v0.6.0/src/commands/check/k8s-monitoring/values/nodeLogs.ts)_
+_See code: [src/commands/check/k8s-monitoring/values/nodeLogs.ts](https://github.com/grafana-ps/tools/blob/v0.7.0/src/commands/check/k8s-monitoring/values/nodeLogs.ts)_
 
 ## `grot check k8s-monitoring values podLogs FILE`
 
@@ -290,7 +290,7 @@ DESCRIPTION
   validate .podLogs
 ```
 
-_See code: [src/commands/check/k8s-monitoring/values/podLogs.ts](https://github.com/grafana-ps/tools/blob/v0.6.0/src/commands/check/k8s-monitoring/values/podLogs.ts)_
+_See code: [src/commands/check/k8s-monitoring/values/podLogs.ts](https://github.com/grafana-ps/tools/blob/v0.7.0/src/commands/check/k8s-monitoring/values/podLogs.ts)_
 
 ## `grot check lgtm values FILE`
 
@@ -311,7 +311,7 @@ DESCRIPTION
   full validation of values.yaml
 ```
 
-_See code: [src/commands/check/lgtm/values.ts](https://github.com/grafana-ps/tools/blob/v0.6.0/src/commands/check/lgtm/values.ts)_
+_See code: [src/commands/check/lgtm/values.ts](https://github.com/grafana-ps/tools/blob/v0.7.0/src/commands/check/lgtm/values.ts)_
 
 ## `grot check lgtm values api FILE`
 
@@ -332,7 +332,7 @@ DESCRIPTION
   validate .api
 ```
 
-_See code: [src/commands/check/lgtm/values/api.ts](https://github.com/grafana-ps/tools/blob/v0.6.0/src/commands/check/lgtm/values/api.ts)_
+_See code: [src/commands/check/lgtm/values/api.ts](https://github.com/grafana-ps/tools/blob/v0.7.0/src/commands/check/lgtm/values/api.ts)_
 
 ## `grot check lgtm values authenticator FILE`
 
@@ -353,7 +353,7 @@ DESCRIPTION
   validate .authenticator
 ```
 
-_See code: [src/commands/check/lgtm/values/authenticator.ts](https://github.com/grafana-ps/tools/blob/v0.6.0/src/commands/check/lgtm/values/authenticator.ts)_
+_See code: [src/commands/check/lgtm/values/authenticator.ts](https://github.com/grafana-ps/tools/blob/v0.7.0/src/commands/check/lgtm/values/authenticator.ts)_
 
 ## `grot check lgtm values loadGenerator FILE`
 
@@ -374,7 +374,7 @@ DESCRIPTION
   validate .loadGenerator
 ```
 
-_See code: [src/commands/check/lgtm/values/loadGenerator.ts](https://github.com/grafana-ps/tools/blob/v0.6.0/src/commands/check/lgtm/values/loadGenerator.ts)_
+_See code: [src/commands/check/lgtm/values/loadGenerator.ts](https://github.com/grafana-ps/tools/blob/v0.7.0/src/commands/check/lgtm/values/loadGenerator.ts)_
 
 ## `grot check lgtm values opentelemetry FILE`
 
@@ -391,7 +391,7 @@ DESCRIPTION
   validate .opentelemetry
 ```
 
-_See code: [src/commands/check/lgtm/values/opentelemetry.ts](https://github.com/grafana-ps/tools/blob/v0.6.0/src/commands/check/lgtm/values/opentelemetry.ts)_
+_See code: [src/commands/check/lgtm/values/opentelemetry.ts](https://github.com/grafana-ps/tools/blob/v0.7.0/src/commands/check/lgtm/values/opentelemetry.ts)_
 
 ## `grot help [COMMAND]`
 
