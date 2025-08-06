@@ -20,7 +20,7 @@ $ npm install -g @grafana-ps/tools
 $ grot COMMAND
 running command...
 $ grot (--version)
-@grafana-ps/tools/0.7.0 linux-x64 node-v23.11.1
+@grafana-ps/tools/0.7.0 linux-x64 node-v20.19.4
 $ grot --help [COMMAND]
 USAGE
   $ grot COMMAND
@@ -29,6 +29,7 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`grot check cloud promql SLUG FILE QUERY`](#grot-check-cloud-promql-slug-file-query)
 * [`grot check cloud token read SLUG FILE`](#grot-check-cloud-token-read-slug-file)
 * [`grot check k8s-monitoring values FILE`](#grot-check-k8s-monitoring-values-file)
 * [`grot check k8s-monitoring values alloy-logs FILE`](#grot-check-k8s-monitoring-values-alloy-logs-file)
@@ -58,6 +59,30 @@ USAGE
 * [`grot plugins uninstall [PLUGIN]`](#grot-plugins-uninstall-plugin)
 * [`grot plugins unlink [PLUGIN]`](#grot-plugins-unlink-plugin)
 * [`grot plugins update`](#grot-plugins-update)
+
+## `grot check cloud promql SLUG FILE QUERY`
+
+validate token read access
+
+```
+USAGE
+  $ grot check cloud promql SLUG FILE QUERY --names <value>... [--labels <value>...] [--stackToken <value>]
+
+ARGUMENTS
+  SLUG   stack slug to use
+  FILE   token file to read
+  QUERY  query to check
+
+FLAGS
+  --labels=<value>...   [default: ] labels to check
+  --names=<value>...    (required) [default: ] metric names to check
+  --stackToken=<value>  token with stack access
+
+DESCRIPTION
+  validate token read access
+```
+
+_See code: [src/commands/check/cloud/promql.ts](https://github.com/grafana-ps/tools/blob/v0.7.0/src/commands/check/cloud/promql.ts)_
 
 ## `grot check cloud token read SLUG FILE`
 
