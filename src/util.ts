@@ -41,6 +41,24 @@ export function formatMetrics(metrics) {
   }).join('\n')
 }
 
+export function collectMetrics(metrics) {
+  return metrics.map((i) => {
+    const {
+      metric,
+      value,
+    } = i
+
+    const labels = _.omit(metric, '__name__')
+
+    return {
+      ...labels,
+      name: _.get(metric, '__name__'),
+      timestamp: value[0],
+      value: value[1],
+    }
+  })
+}
+
 export function createBearerHeaders(
   token: string,
 ) {
@@ -103,10 +121,11 @@ export async function readMetrics(
   username: string,
   password: string,
   url: string,
+  query: string = 'up',
 ) {
   const u = new URL(url)
   u.pathname = `${u.pathname}/query`
-  u.searchParams.set('query', 'up')
+  u.searchParams.set('query', query)
   u.searchParams.set('time', now())
 
   const response = await fetch(u.toString(), {
