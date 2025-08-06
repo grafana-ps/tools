@@ -22,12 +22,12 @@ export default class CheckCloudPromQLRead extends Command {
       description: 'stack slug to use',
       required: true,
     }),
-    file: Args.string({
+    fileToken: Args.string({
       description: 'token file to read',
       required: true,
     }),
-    query: Args.string({
-      description: 'query to check',
+    fileQuery: Args.string({
+      description: 'query file to check',
       required: true
     }),
   }
@@ -111,8 +111,8 @@ export default class CheckCloudPromQLRead extends Command {
     const {args, flags} = await this.parse(CheckCloudPromQLRead)
 
     const {
-      file,
-      query,
+      fileToken,
+      fileQuery,
       slug,
     } = args
     const {
@@ -123,7 +123,7 @@ export default class CheckCloudPromQLRead extends Command {
 
     this.log(`Validating PromQL`)
 
-    const token = fs.readFileSync(file, 'utf8')
+    const token = fs.readFileSync(fileToken, 'utf8')
 
     if (_.isEmpty(token)) {
       this.error('token is empty')
@@ -131,6 +131,12 @@ export default class CheckCloudPromQLRead extends Command {
 
     if (_.isEmpty(stackToken)) {
       this.error('TODO: add access without stack token')
+    }
+
+    const query = fs.readFileSync(fileQuery, 'utf8')
+
+    if (_.isEmpty(query)) {
+      this.error('query is empty')
     }
 
     const instance = await this.getStack(

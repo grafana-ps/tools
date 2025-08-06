@@ -88,10 +88,11 @@
     "watch": "nodemon --exec 'pnpm run build && ./bin/run.js'"
   },
   "nodemonConfig": {
-    "ext": "ts",
+    "ext": "ts,js,txt,yaml",
     "verbose": true,
     "watch": [
-      "src/**/*"
+      "src",
+      "/home/grafana"
     ]
   },
   "types": "dist/index.d.ts",
