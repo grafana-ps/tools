@@ -20,7 +20,7 @@ $ npm install -g @grafana-ps/tools
 $ grot COMMAND
 running command...
 $ grot (--version)
-@grafana-ps/tools/0.8.0 linux-x64 node-v23.11.1
+@grafana-ps/tools/0.8.0 linux-x64 node-v20.19.4
 $ grot --help [COMMAND]
 USAGE
   $ grot COMMAND
@@ -29,7 +29,7 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`grot check cloud promql SLUG FILE QUERY`](#grot-check-cloud-promql-slug-file-query)
+* [`grot check cloud promql SLUG FILETOKEN FILEQUERY`](#grot-check-cloud-promql-slug-filetoken-filequery)
 * [`grot check cloud token read SLUG FILE`](#grot-check-cloud-token-read-slug-file)
 * [`grot check k8s-monitoring values FILE`](#grot-check-k8s-monitoring-values-file)
 * [`grot check k8s-monitoring values alloy-logs FILE`](#grot-check-k8s-monitoring-values-alloy-logs-file)
@@ -60,18 +60,18 @@ USAGE
 * [`grot plugins unlink [PLUGIN]`](#grot-plugins-unlink-plugin)
 * [`grot plugins update`](#grot-plugins-update)
 
-## `grot check cloud promql SLUG FILE QUERY`
+## `grot check cloud promql SLUG FILETOKEN FILEQUERY`
 
 validate token read access
 
 ```
 USAGE
-  $ grot check cloud promql SLUG FILE QUERY --names <value>... [--labels <value>...] [--stackToken <value>]
+  $ grot check cloud promql SLUG FILETOKEN FILEQUERY --names <value>... [--labels <value>...] [--stackToken <value>]
 
 ARGUMENTS
-  SLUG   stack slug to use
-  FILE   token file to read
-  QUERY  query to check
+  SLUG       stack slug to use
+  FILETOKEN  token file to read
+  FILEQUERY  query file to check
 
 FLAGS
   --labels=<value>...   [default: ] labels to check
