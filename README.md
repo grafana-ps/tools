@@ -20,7 +20,7 @@ $ npm install -g @grafana-ps/tools
 $ grot COMMAND
 running command...
 $ grot (--version)
-@grafana-ps/tools/0.10.1 linux-x64 node-v23.11.1
+@grafana-ps/tools/0.10.1 linux-x64 node-v20.19.4
 $ grot --help [COMMAND]
 USAGE
   $ grot COMMAND
@@ -67,6 +67,7 @@ validate token read access
 ```
 USAGE
   $ grot check cloud promql SLUG FILETOKEN FILEQUERY --names <value>... [--labels <value>...] [--stackToken <value>]
+    [--strict]
 
 ARGUMENTS
   SLUG       stack slug to use
@@ -77,6 +78,7 @@ FLAGS
   --labels=<value>...   [default: ] labels to check
   --names=<value>...    (required) [default: ] metric names to check
   --stackToken=<value>  token with stack access
+  --strict              strict label check
 
 DESCRIPTION
   validate token read access
