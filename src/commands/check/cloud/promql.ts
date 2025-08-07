@@ -12,6 +12,7 @@ import ora from 'ora'
 
 import {
   collectMetrics,
+  formatMetrics,
   getInstance,
   readMetrics,
 } from '../../../util.js'
@@ -186,14 +187,27 @@ export default class CheckCloudPromQLRead extends Command {
     }
 
     for (const l of labels) {
-      const spinner = ora(`Verifying "${l}" label...`).start()
+      const [
+        label,
+        regex,
+      ]  = l.split('=')
+      const spinner = ora(`Verifying "${label}" label... [${regex}]`).start()
 
-      if (!_.some(collection , l)) {
-        spinner.fail(`"${l}" label not found.`)
-        this.error(`"${l}" label not found.`)
+      if (!_.some(collection , label)) {
+        spinner.fail(`"${label}" label not found.`)
+        this.error(`"${label}" label not found.`)
       }
 
-      spinner.succeed(`Verified "${l}" label.`)
+      const s = _.filter(collection, label)
+      const r = new RegExp(regex)
+      const test = (i) => !r.test(_.get(i, label))
+      if (_.some(s, test)) {
+        const ex = JSON.stringify(_.find(s, test), null, 2)
+        spinner.fail(`"${label}" label does not match "${regex}".`)
+        this.error(`"${label}" label does not match "${regex}". \n${ex}`)
+      }
+
+      spinner.succeed(`Verified "${label}" label. [${regex}]`)
     }
   }
 }
