@@ -12,7 +12,6 @@ import ora from 'ora'
 
 import {
   collectMetrics,
-  formatMetrics,
   getInstance,
   readMetrics,
 } from '../../../util.js'
@@ -52,6 +51,11 @@ export default class CheckCloudPromQLRead extends Command {
       description: 'token with stack access',
       required: false,
     }),
+    strict: Flags.boolean({
+      default: false,
+      description: 'strict label check',
+      required: false,
+    })
   }
 
   public async getStack(
@@ -112,14 +116,15 @@ export default class CheckCloudPromQLRead extends Command {
     const {args, flags} = await this.parse(CheckCloudPromQLRead)
 
     const {
-      fileToken,
       fileQuery,
+      fileToken,
       slug,
     } = args
     const {
       labels,
       names,
       stackToken,
+      strict,
     } = flags
 
     this.log(`Validating PromQL`)
@@ -152,38 +157,92 @@ export default class CheckCloudPromQLRead extends Command {
       query,
     )
 
-    await this.validateMetrics(metrics, names, labels)
+    await this.validateMetrics({
+      labels,
+      metrics,
+      names,
+      query,
+      strict,
+    })
 
     this.log(em(`:heavy_check_mark:PromQL is valid`))
     this.log()
   }
 
-  public async validateMetrics(metrics, names, labels) {
+  public async validateMetrics({
+    labels,
+    metrics,
+    names,
+    query,
+    strict,
+  }) {
     const collection = collectMetrics(metrics)
 
-    let without = collection
+    let without = _.reject(collection, ['name', undefined])
 
-    for (const n of names) {
-      const spinner = ora(`Verifying ${n}{} series...`).start()
+    if (without.length === 0) {
+      const spinner = ora(`Aggregation detected, checking query...`).start()
 
-      if (!_.some(collection , ['name', n])) {
-        spinner.fail(`${n}{} series not found.`)
-        this.error(`${n}{} series not found.`)
+      const q = query
+        .replaceAll(' ', '')
+        .matchAll(/([a-zA-Z0-9_]*?){/g)
+
+      const n = [...q].map((m) => m[1])
+
+      const missing = _.difference(names, n)
+      if (missing.length > 0) {
+        spinner.fail(`Aggregation query is invalid.`)
+        this.error(`Aggregation query is invalid. Missing metrics: \n${JSON.stringify(missing)}`)
       }
 
-      spinner.succeed(`Verified ${n}{} series.`)
+      const unexpected = _.difference(n, names)
+      if (unexpected.length > 0) {
+        spinner.fail(`Aggregation query is invalid.`)
+        this.error(`Aggregation query is invalid. Unexpected metrics: \n${JSON.stringify(unexpected)}`)
+      }
 
-      without = _.reject(without, ['name', n])
+      spinner.succeed(`Aggregation query is valid.`)
+    } else {
+      for (const n of names) {
+        const spinner = ora(`Verifying ${n}{} series...`).start()
+
+        if (!_.some(collection , ['name', n])) {
+          spinner.fail(`${n}{} series not found.`)
+          this.error(`${n}{} series not found.`)
+        }
+
+        spinner.succeed(`Verified ${n}{} series.`)
+
+        without = _.reject(without, ['name', n])
+      }
+
+      if (without.length > 0) {
+        this.error(
+          `Unexpected metrics found: ${JSON.stringify(without)}`
+        )
+      }
+
+      if (labels.length === 0) {
+        return
+      }
     }
 
-    if (without.length > 0) {
-      this.error(
-        `Unexpected metrics found: ${JSON.stringify(without)}`
-      )
-    }
+    const ln = labels.map((l) => _.first(l.split('=')))
 
-    if (labels.length === 0) {
-      return
+    if (strict) {
+      for (const c of collection) {
+        const k = _.keys(_.omit(c, ['name', 'timestamp', 'value']))
+
+        const diff = _.difference(k, ln)
+
+        if (diff.length === 0) {
+          continue
+        }
+
+        this.error(
+          `Unexpected labels found: ${JSON.stringify(diff)}`
+        )
+      }
     }
 
     for (const l of labels) {
@@ -201,9 +260,9 @@ export default class CheckCloudPromQLRead extends Command {
       }
 
       const s = _.filter(collection, label)
-      const test = (i) => !r.test(_.get(i, label))
-      if (_.some(s, test)) {
-        const ex = JSON.stringify(_.find(s, test), null, 2)
+      const unmatch = _.find(s, (i) => !r.test(_.get(i, label)))
+      if (unmatch) {
+        const ex = JSON.stringify(unmatch, null, 2)
         spinner.fail(`"${label}" label does not match ${r}.`)
         this.error(`"${label}" label does not match ${r}. \n${ex}`)
       }
