@@ -191,7 +191,9 @@ export default class CheckCloudPromQLRead extends Command {
         label,
         regex,
       ]  = l.split('=')
-      const spinner = ora(`Verifying "${label}" label... [${regex}]`).start()
+      const r = new RegExp(_.trim(regex, " \"'"))
+
+      const spinner = ora(`Verifying "${label}" label... ${r}`).start()
 
       if (!_.some(collection , label)) {
         spinner.fail(`"${label}" label not found.`)
@@ -199,15 +201,14 @@ export default class CheckCloudPromQLRead extends Command {
       }
 
       const s = _.filter(collection, label)
-      const r = new RegExp(regex)
       const test = (i) => !r.test(_.get(i, label))
       if (_.some(s, test)) {
         const ex = JSON.stringify(_.find(s, test), null, 2)
-        spinner.fail(`"${label}" label does not match "${regex}".`)
-        this.error(`"${label}" label does not match "${regex}". \n${ex}`)
+        spinner.fail(`"${label}" label does not match ${r}.`)
+        this.error(`"${label}" label does not match ${r}. \n${ex}`)
       }
 
-      spinner.succeed(`Verified "${label}" label. [${regex}]`)
+      spinner.succeed(`Verified "${label}" label. ${r}`)
     }
   }
 }
