@@ -179,7 +179,7 @@ export default class CheckCloudPromQLRead extends Command {
       labels,
       metrics,
       names,
-      query,
+      query: query.replaceAll(/(\n|\r)/g, ' '),
       strict,
     })
 
