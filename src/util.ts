@@ -126,7 +126,6 @@ export async function readMetrics(
   const u = new URL(url)
   u.pathname = `${u.pathname}/query`
   u.searchParams.set('query', query)
-  u.searchParams.set('time', now())
 
   const response = await fetch(u.toString(), {
     headers: createBasicHeaders(username, password),

@@ -33,6 +33,20 @@ export default class CheckCloudPromQLRead extends Command {
   }
   static override description = 'validate token read access'
   static override flags = {
+    aggregations: Flags.string({
+      default: [],
+      delimiter: ',',
+      description: 'aggregations to check',
+      multiple: true,
+      required: false,
+    }),
+    functions: Flags.string({
+      default: [],
+      delimiter: ',',
+      description: 'functions to check',
+      multiple: true,
+      required: false,
+    }),
     labels: Flags.string({
       default: [],
       delimiter: ',',
@@ -121,6 +135,8 @@ export default class CheckCloudPromQLRead extends Command {
       slug,
     } = args
     const {
+      aggregations,
+      functions,
       labels,
       names,
       stackToken,
@@ -158,6 +174,8 @@ export default class CheckCloudPromQLRead extends Command {
     )
 
     await this.validateMetrics({
+      aggregations,
+      functions,
       labels,
       metrics,
       names,
@@ -170,6 +188,8 @@ export default class CheckCloudPromQLRead extends Command {
   }
 
   public async validateMetrics({
+    aggregations,
+    functions,
     labels,
     metrics,
     names,
@@ -178,10 +198,44 @@ export default class CheckCloudPromQLRead extends Command {
   }) {
     const collection = collectMetrics(metrics)
 
+    if (aggregations.length > 0) {
+      const spinner = ora(`Verifying aggregations...`).start()
+
+      for (const a of aggregations) {
+        const r = new RegExp(`${a}[a-zA-Z0-9\\s]*?\\(.*\\)`)
+
+        if (r.test(query)) {
+          continue
+        }
+
+        spinner.fail(`Aggregation ${a}() is missing.`)
+        this.error(`Aggregation ${a}() is missing.`)
+      }
+
+      spinner.succeed(`Verified aggregations.`)
+    }
+
+    if (functions.length > 0) {
+      const spinner = ora(`Verifying functions...`).start()
+
+      for (const f of functions) {
+        const r = new RegExp(`${f}.*?\\(.*\\)`)
+
+        if (r.test(query)) {
+          continue
+        }
+
+        spinner.fail(`Function ${f}() is missing.`)
+        this.error(`Function ${f}() is missing.`)
+      }
+
+      spinner.succeed(`Verified functions.`)
+    }
+
     let without = _.reject(collection, ['name', undefined])
 
     if (without.length === 0) {
-      const spinner = ora(`Aggregation detected, checking query...`).start()
+      const spinner = ora(`Calculation detected, checking query...`).start()
 
       const q = query
         .replaceAll(' ', '')
@@ -191,17 +245,17 @@ export default class CheckCloudPromQLRead extends Command {
 
       const missing = _.difference(names, n)
       if (missing.length > 0) {
-        spinner.fail(`Aggregation query is invalid.`)
-        this.error(`Aggregation query is invalid. Missing metrics: \n${JSON.stringify(missing)}`)
+        spinner.fail(`Calculation query is invalid.`)
+        this.error(`Calculation query is invalid. Missing metrics: \n${JSON.stringify(missing)}`)
       }
 
       const unexpected = _.difference(n, names)
       if (unexpected.length > 0) {
-        spinner.fail(`Aggregation query is invalid.`)
-        this.error(`Aggregation query is invalid. Unexpected metrics: \n${JSON.stringify(unexpected)}`)
+        spinner.fail(`Calculation query is invalid.`)
+        this.error(`Calculation query is invalid. Unexpected metrics: \n${JSON.stringify(unexpected)}`)
       }
 
-      spinner.succeed(`Aggregation query is valid.`)
+      spinner.succeed(`Calculation query is valid.`)
     } else {
       for (const n of names) {
         const spinner = ora(`Verifying ${n}{} series...`).start()
