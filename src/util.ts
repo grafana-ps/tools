@@ -82,6 +82,22 @@ export function createBasicHeaders(
   }
 }
 
+export async function getConnections(
+  slug: string,
+  token: string,
+) {
+  const url = `https://grafana.com/api/instances/${slug}/connections`
+
+  const response = await fetch(url, {
+    headers: createBearerHeaders(token),
+    method: 'GET',
+  })
+
+  const connections = await response.json()
+
+  return connections
+}
+
 export async function getInstance(
   slug: string,
   token: string,
@@ -95,10 +111,16 @@ export async function getInstance(
 
   const data = await response.json()
 
+  const connections = await getConnections(slug, token)
+
   const instance = {
     loki: {
       id: _.toString(_.get(data, 'hlInstanceId')),
       url: _.get(data, 'hlInstanceUrl'),
+    },
+    otlp: {
+      id: _.toString(_.get(data, 'id')),
+      url: _.get(connections, 'otlpHttpUrl'),
     },
     prometheus: {
       id: _.toString(_.get(data, 'hmInstancePromId')),

@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@catalystic/json-to-yaml':
+        specifier: ^1.0.0
+        version: 1.0.0
       '@grafana-ps/tools':
         specifier: 'link:'
         version: 'link:'
@@ -276,6 +279,9 @@ packages:
   '@babel/helper-validator-identifier@7.27.1':
     resolution: {integrity: sha512-D2hP9eA+Sqx1kBZgzxZh0y1trbuU+JoDkiEwqhQ36nodYqJwyEIhPSdMNd7lOm/4io72luTPWH20Yda0xOuUow==}
     engines: {node: '>=6.9.0'}
+
+  '@catalystic/json-to-yaml@1.0.0':
+    resolution: {integrity: sha512-SsaxDB/JojD+bXv/UA1z5sUCfL0t2oP9qasyzIPhYHCh1JuFkd82Ip8D/81bjeaCFDsy2GiWqaVPcJD4+rXrqw==}
 
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -3997,6 +4003,8 @@ snapshots:
       picocolors: 1.1.1
 
   '@babel/helper-validator-identifier@7.27.1': {}
+
+  '@catalystic/json-to-yaml@1.0.0': {}
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
