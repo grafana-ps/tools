@@ -20,7 +20,7 @@ $ npm install -g @grafana-ps/tools
 $ grot COMMAND
 running command...
 $ grot (--version)
-@grafana-ps/tools/0.10.4 linux-x64 node-v23.11.1
+@grafana-ps/tools/0.10.4 linux-x64 node-v20.19.4
 $ grot --help [COMMAND]
 USAGE
   $ grot COMMAND
@@ -48,6 +48,7 @@ USAGE
 * [`grot check lgtm values authenticator FILE`](#grot-check-lgtm-values-authenticator-file)
 * [`grot check lgtm values loadGenerator FILE`](#grot-check-lgtm-values-loadgenerator-file)
 * [`grot check lgtm values opentelemetry FILE`](#grot-check-lgtm-values-opentelemetry-file)
+* [`grot generate k8s-monitoring values SLUG WRITETOKENFILE FILE`](#grot-generate-k8s-monitoring-values-slug-writetokenfile-file)
 * [`grot help [COMMAND]`](#grot-help-command)
 * [`grot plugins`](#grot-plugins)
 * [`grot plugins add PLUGIN`](#grot-plugins-add-plugin)
@@ -421,6 +422,28 @@ DESCRIPTION
 ```
 
 _See code: [src/commands/check/lgtm/values/opentelemetry.ts](https://github.com/grafana-ps/tools/blob/v0.10.4/src/commands/check/lgtm/values/opentelemetry.ts)_
+
+## `grot generate k8s-monitoring values SLUG WRITETOKENFILE FILE`
+
+full generation of values.yaml
+
+```
+USAGE
+  $ grot generate k8s-monitoring values SLUG WRITETOKENFILE FILE --stackToken <value>
+
+ARGUMENTS
+  SLUG            stack slug to use
+  WRITETOKENFILE  write token file destination
+  FILE            write destination
+
+FLAGS
+  --stackToken=<value>  (required) token with stack access
+
+DESCRIPTION
+  full generation of values.yaml
+```
+
+_See code: [src/commands/generate/k8s-monitoring/values.ts](https://github.com/grafana-ps/tools/blob/v0.10.4/src/commands/generate/k8s-monitoring/values.ts)_
 
 ## `grot help [COMMAND]`
 
