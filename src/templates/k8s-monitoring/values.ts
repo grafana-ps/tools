@@ -1,4 +1,5 @@
 /* eslint-disable perfectionist/sort-objects */
+/* eslint-disable perfectionist/sort-switch-case */
 
 import {
   convert
@@ -11,8 +12,34 @@ export function generate(
   const values = structuredClone(template)
 
   for (const destination of values.destinations) {
+    const {
+      type,
+    } = destination
+
     const info = instance[destination.type]
-    destination.url = info.url
+
+    let {
+      url
+    } = info
+
+    switch (type) {
+      case 'prometheus': {
+        url = `${url}/api/prom/push`
+        break
+      }
+
+      case 'loki': {
+        url = `${url}/loki/api/v1/push`
+        break
+      }
+
+      case 'otlp': {
+        url = `${url}/otlp`
+        break
+      }
+    }
+
+    destination.url = url
     destination.auth.username = info.id
     destination.auth.password = writeToken
   }

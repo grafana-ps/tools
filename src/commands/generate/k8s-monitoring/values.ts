@@ -8,11 +8,11 @@ import fs from 'node:fs'
 import ora from 'ora'
 
 import {
-  getInstance,
-} from '../../../util.js'
-import {
   generate,
 } from '../../../templates/k8s-monitoring/values.js'
+import {
+  getInstance,
+} from '../../../util.js'
 
 export default class GenerateK8sMonitoringValues extends Command {
   /* eslint-disable perfectionist/sort-objects */
@@ -88,13 +88,13 @@ export default class GenerateK8sMonitoringValues extends Command {
       stackToken,
     } = flags
 
-    const token = fs.readFileSync(stackToken, 'utf8')
+    const token = _.trim(fs.readFileSync(stackToken, 'utf8'))
 
     if (_.isEmpty(token)) {
       this.error('stack token is empty')
     }
 
-    const writeToken = fs.readFileSync(writeTokenFile, 'utf8')
+    const writeToken = _.trim(fs.readFileSync(writeTokenFile, 'utf8'))
 
     if (_.isEmpty(writeToken)) {
       this.error('write token is empty')
