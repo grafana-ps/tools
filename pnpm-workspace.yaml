@@ -1,3 +1,6 @@
 onlyBuiltDependencies:
   - protobufjs
   - unrs-resolver
+
+overrides:
+  '@grafana-ps/tools': 'link:'
